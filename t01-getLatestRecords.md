@@ -30,5 +30,13 @@
 ## Query
 
 ```
-
+SELECT p.*,d.name FROM prices p
+inner join product d 
+on d.id=p.product_id
+WHERE 
+prices.id IN 
+    ( SELECT MAX(prices.id) FROM prices GROUP BY prices.created_at ) 
 ```
+
+### Source
+[Stackoverflow](https://stackoverflow.com/questions/47951500/combine-latest-records-with-table)
