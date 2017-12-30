@@ -36,7 +36,16 @@
 # Query  
 
 ```
-
+SELECT *
+FROM product AS p
+INNER JOIN revisions AS r ON p.revision_id = r.id 
+WHERE p.name IN (
+  SELECT p.name
+  FROM product AS p
+  INNER JOIN revisions AS r ON p.revision_id = r.id 
+  GROUP BY p.name
+  HAVING COUNT(r.revision_status) > 1)
+ORDER BY p.name
 ```
 
 # Reference
